@@ -80,7 +80,7 @@ function initDispatcher(connection) {
 	if (currentTrack.name) changeActivity(currentTrack.name);
 	
 	const streamDispatcher = connection.play(currentTrack.url, {
-			volume: false,
+			volume: true,
 			highWaterMark: 512,
 			bitrate: 128,
 			fec: true
@@ -90,7 +90,8 @@ function initDispatcher(connection) {
 			streamDispatcher.destroy();
 			initDispatcher(connection);
 		});
-		
+
+	streamDispatcher.setVolume(0.05);
 	streamDispatcher.setBitrate(128);
 	streamDispatcher.setFEC(true);
 	
